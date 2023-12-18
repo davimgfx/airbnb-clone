@@ -1,13 +1,13 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, renderHook } from "@testing-library/react";
 
 import { Logo } from ".";
 
 import { useMedia } from "./hooks/useMedia";
-import "./mocks/testMock";
-
-import { logoSmall, logo } from "@/assets";
 
 const { getByAltText } = screen;
+
+import { testMediaMatches } from "./mocks/testMock";
+
 
 describe("<Logo />", () => {
   beforeEach(() => {
@@ -26,33 +26,27 @@ describe("<Logo />", () => {
     expect(window.location.pathname).toBe("/");
   });
 
-  it("should render the small logo on cellphone screens", () => {
-    Object.defineProperty(useMedia, "matchMedia", {
-      value: (query: any) =>
-        jest.fn().mockReturnValue(query === "(max-width: 768px)"),
-    });
+  it("should have responsive logo", () => {
+    const logoDiv = getByAltText("logo airbnb").parentElement;
 
-    const logoAirbnb = getByAltText("logo airbnb");
-
-    logoAirbnb.getAttribute("width") === "30";
-
-    logoAirbnb.getAttribute("height") === "30";
-    
-    logoAirbnb.getAttribute("src") === logoSmall;
-
-    Object.defineProperty(window, "innerWidth", {
-      writable: true,
-      value: undefined,
-    });
+    expect(logoDiv).toHaveClass(
+      "sm:block hidden cursor-pointer md:w-[6.4rem] w-[2rem]"
+    );
   });
 
-  it("should render the normal logo on PC screens", () => {
-    const logoAirbnb = getByAltText("logo airbnb");
+  it("should return matches false", () => {
+    testMediaMatches(false)
 
-    logoAirbnb.getAttribute("width") === "100";
+    const { result } = renderHook(() => useMedia("(min-width: 400px)"));
 
-    logoAirbnb.getAttribute("height") === "100";
+    expect(result.current).toBe(false);
+  });
 
-    logoAirbnb.getAttribute("src") === logo;
+  it("should return matches true", () => {
+    testMediaMatches(true)
+
+    const { result } = renderHook(() => useMedia("(min-width: 400px)"));
+
+    expect(result.current).toBe(true);
   });
 });

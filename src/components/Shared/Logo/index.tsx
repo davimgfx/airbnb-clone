@@ -1,24 +1,19 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { logo, logoSmall } from "@/assets";
 import { useMedia } from "./hooks/useMedia";
 
-export const Logo = () => {
-  const isViewportMobile = useMedia('(max-width: 768px)')
-  const sizeOfImage = isViewportMobile ? 30: 100
-  const logoImage = isViewportMobile ? logoSmall : logo
+export const Logo = ({}) => {
+  const isViewportMobile = useMedia("(min-width: 768px)");
+  const logoImage = isViewportMobile ?  logo : logoSmall;
 
   return (
-    <Link href="./">
-      <Image
-        alt="logo airbnb"
-        className="cursor-pointer"
-        src={logoImage}
-        width={sizeOfImage}
-        height={sizeOfImage}
-      />
+    <Link
+      href="./"
+      className="sm:block hidden cursor-pointer md:w-[6.4rem] w-[2rem]">
+      <Image alt="logo airbnb" src={logoImage} priority={true}/>
     </Link>
   );
 };
