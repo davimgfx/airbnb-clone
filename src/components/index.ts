@@ -14,3 +14,4 @@ export * from "./Forms/FormsAuth/FormRegister";
 export * from "./Dialog/DialogAuth/LoginModal";
 export * from "./Dialog/DialogAuth/RegisterModal";
 export * from "./Dialog/DialogAuth/RegisterModal/hooks/useRegisterModal";
+export * from "./Shared/Header";
