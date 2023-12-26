@@ -6,3 +6,4 @@ export * from "./Popover";
 export * from "./Forms/Input";
 export * from "./Shared/Logo";
 export * from "./Shared/Container";
+export * from "./Dialog/Dialog";
