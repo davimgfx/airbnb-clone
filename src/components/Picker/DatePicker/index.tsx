@@ -3,7 +3,7 @@
 import * as React from "react";
 import { format } from "date-fns";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import {
   Popover,
   PopoverContent,
@@ -32,7 +32,6 @@ export const DatePicker = () => {
           selected={date}
           onSelect={setDate}
           initialFocus
-          
         />
       </PopoverContent>
     </Popover>

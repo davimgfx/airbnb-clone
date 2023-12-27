@@ -26,7 +26,6 @@ export const FormRegister = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     registerModal.actions.onClose();
-    console.log(registerModal.state.isOpen);
     axios
       .post("/api/register", data)
       .then(() => {
