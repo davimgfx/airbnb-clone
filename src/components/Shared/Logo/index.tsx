@@ -11,7 +11,7 @@ export const Logo = ({}) => {
 
   return (
     <Link
-      href="./"
+      href="../../../"
       className="sm:block hidden cursor-pointer md:w-[6.4rem] w-[2rem]">
       <Image alt="logo airbnb" src={logoImage} priority={true}/>
     </Link>
