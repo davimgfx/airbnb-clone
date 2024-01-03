@@ -31,7 +31,7 @@ export const FormRegister = () => {
       .then(() => {
         toast.success("Registered!");
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Something went wrong.");
       })
       .finally(() => {
