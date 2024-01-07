@@ -1,16 +1,19 @@
 import { create } from 'zustand';
 
 interface LoginModalStore {
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
+  state: { isOpen: boolean };
+  actions: {
+    onOpen: () => void;
+    onClose: () => void;
+  };
 }
 
-const useLoginModal = create<LoginModalStore>((set) => ({
-  isOpen: false,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false })
+export const useLoginModal = create<LoginModalStore>((set) => ({
+  state: { isOpen: false },
+  actions: {
+    onOpen: () => set({ state: { isOpen: true } }),
+    onClose: () => set({ state: { isOpen: false } }),
+  },
 }));
 
 
-export default useLoginModal;

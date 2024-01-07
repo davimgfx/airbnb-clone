@@ -1,19 +1,26 @@
 "use client";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  FormLogin,
+  useLoginModal
 } from "@/components";
 
 export const LoginModal = () => {
+  const {
+    state: { isOpen },
+    actions: { onClose, onOpen },
+  } = useLoginModal();
+
+  const handleModalControl = () => (isOpen ? onClose() : onOpen());
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={handleModalControl}>
       <DialogTrigger asChild>
-        <p className="cursor-pointer">Login In</p>
+        <p className="cursor-pointer">Login</p>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -21,10 +28,7 @@ export const LoginModal = () => {
           <DialogDescription>Welcome to Airbnb</DialogDescription>
           <p className="text-xs">Login into your account</p>
         </DialogHeader>
-        <div className="flex flex-col gap-4"></div>
-        <Button type="submit" className="bg-[#FF385C]">
-          Submit
-        </Button>
+        <FormLogin />
       </DialogContent>
     </Dialog>
   );
